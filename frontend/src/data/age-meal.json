@@ -1,0 +1,37 @@
+[
+    {
+        "group": "18-20",
+        "Breakfast": "2",
+        "Lunch": "3",
+        "Dinner": "2",
+        "Snacks": "7"
+    },
+    {
+        "group": "21-23",
+        "Breakfast": "23",
+        "Lunch": "58",
+        "Dinner": "35",
+        "Snacks": "37"
+    },
+    {
+        "group": "24-26",
+        "Breakfast": "11",
+        "Lunch": "25",
+        "Dinner": "28",
+        "Snacks": "38"
+    },
+    {
+        "group": "27-29",
+        "Breakfast": "7",
+        "Lunch": "11",
+        "Dinner": "5",
+        "Snacks": "13"
+    },
+    {
+        "group": "30-32",
+        "Breakfast": "10",
+        "Lunch": "23",
+        "Dinner": "21",
+        "Snacks": "29"
+    }
+]
