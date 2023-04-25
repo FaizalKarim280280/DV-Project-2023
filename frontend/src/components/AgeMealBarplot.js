@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import * as d3 from 'd3';
+import Sankey from './Sankey';
 const ageMealData = require("../data/age-meal.json");
 const incomeMealData = require('../data/income-meal.json');
 
@@ -34,7 +35,7 @@ export default function Age_meal_barplot() {
         const colors = ['#7B1FA2', '#9C27B0', '#BA68C8', '#E1BEE7'];
 
         renderGroupedBarPlot(ageMealData, subgroups, groups, svg, 60, colors,
-             "Meal Consumption by Age Group: A Stacked Bar Char", "Age Groups", "Count");
+            "Meal Consumption by Age Group: A Groped Bar Char", "Age Groups", "Count");
 
     }
 
@@ -50,16 +51,19 @@ export default function Age_meal_barplot() {
         var groups = ['No Income', "Below Rs 10000", "More than 50000",
             "10001 to 25000", "25001 to 25000"];
 
-        const colors = ['#0277BD', '#0277BD', '#4FC3F7', '#81D4FA'];
+        const colors = ['#0277BD', '#039BE5', '#4FC3F7', '#81D4FA'];
 
-        renderGroupedBarPlot(incomeMealData, subgroups, groups, svg, 60, colors, 
-            "Meal Consumption by Income level: A Stacked Bar Char", "Income level", "Count");
+        renderGroupedBarPlot(incomeMealData, subgroups, groups, svg, 60, colors,
+            "Meal Consumption by Income level: A Grouped Bar Char", "Income level", "Count");
     }
 
     useEffect(() => {
 
         renderPlot1();
         renderPlot2();
+
+        // console.log(d3.scaleOrdinal(d3.schemeTableau10)[0]);
+
 
     }, [])
 
@@ -199,44 +203,9 @@ export default function Age_meal_barplot() {
     return (
         <>
 
-            <div className='img-div'>
-
-                <img className='img-fluid cover-image' src={require('../cover-image.jpg')}></img>
-
-            </div>
-
-            <div className='container container-fluid heading-div' style={{ "marginTop": "5%", "height": "700px" }}>
-
-                <div className="row">
-
-                    <div className="col-7">
-
-                        <div className="heading">
-                            <h3 className='display-2 fw-bold'>Exploring Bangalore's Appetite</h3>
-
-                            <p className='display-6 my-5'>
-                                An Analysis of Food Ordering Habits, Delivery Preferences,
-                                and Customer Satisfaction in the Silicon Valley of
-                                India.</p>
-                            <hr></hr>
-                            
-                            <p className='mt-5 mb-1'>Team: Insight Imagers</p>
-                            <p>Date: 15th April 2023</p>
-                            
-                            {/* <p>Data: <span><a href='#'>Online Food Delivery Preferences....</a></span></p> */}
-                        </div>
-                    </div>
-
-                    <div className="col-5" style={{"paddingLeft" : "10%"}}>
-
-                        <img className = 'img-fluid' src={require('../food_delivery.gif')}></img>
-                    </div>
-                </div>
 
 
-            </div>
-
-            <div style={{ "backgroundColor": '#f5f5f5' }}>
+            <div>
 
                 <div className="row" style={{ "padding": "5% 5% 6% 5%" }}>
                     <div className="col-6">
@@ -253,7 +222,7 @@ export default function Age_meal_barplot() {
 
             </div>
 
-            <div>
+            <div className='gray-bg'>
 
                 <div className="row" style={{ "padding": "5% 5% 6% 5%" }}>
                     <div className="col-6">
@@ -269,47 +238,6 @@ export default function Age_meal_barplot() {
                 </div>
             </div>
 
-
-            <div style={{ "backgroundColor": '#f5f5f5' }}>
-
-                <div className="row" style={{ "padding": "5% 5% 6% 5%" }}>
-                    <div className="col-6">
-
-                    </div>
-
-                    <div className="col-6">
-                        {/* <p>Hello world</p> */}
-                    </div>
-
-                </div>
-
-            </div>
-
-            <footer className="bg-dark text-white">
-
-                <div className="container py-4">
-
-                    <div className="row">
-
-                        <div className="col-6">
-                            <h3> DV Project 2023</h3>
-                        </div>
-
-
-                        <div className="col-3">
-                            <h3>Team Members</h3>
-
-                            <div className='my-4'>
-                                <p className='m-2'>Nirmala Kadali</p>
-                                <p className='m-2'>Manohar Naga</p>
-                                <p className='m-2'>Md Faizal Karim</p>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-            </footer>
 
 
         </>
