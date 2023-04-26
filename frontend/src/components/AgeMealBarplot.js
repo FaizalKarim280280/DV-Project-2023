@@ -37,7 +37,7 @@ export default function Age_meal_barplot() {
         const colors = ['#7B1FA2', '#9C27B0', '#BA68C8', '#E1BEE7'];
 
         renderGroupedBarPlot(ageMealData, subgroups, groups, svg, 60, colors,
-            "Meal Consumption by Age Group: A Groped Bar Char", "Age Groups", "Count");
+            "Meal Consumption by Age Group: A Groped Bar Char", "Age Groups", "Percentage");
 
     }
 
@@ -96,7 +96,7 @@ export default function Age_meal_barplot() {
             .range([innerHeight, 0])
             .nice();
 
-        const yAxis = d3.axisLeft(y);
+        const yAxis = d3.axisLeft(y).tickFormat((d) => d + "%")
 
         const yAxisG = g.append('g')
             .call(yAxis)

@@ -2,12 +2,15 @@ import React, { useState, useRef } from 'react'
 import { MapContainer, TileLayer, useMap, Marker, Popup, Circle, useMapEvent, useMapEvents } from 'react-leaflet';
 
 import * as d3 from 'd3';
+import cloud from 'd3-cloud';
+
 const deliveryData = require('../data/data.json');
 
 export default function MapLocater() {
 
     const [radius, setRadius] = useState(1500);
     const svgRef = useRef();
+    const [plot, setPlot] = useState("");
 
     const handleOnRadiusChange = (event) => {
         // console.log(event.target.value);
@@ -15,16 +18,23 @@ export default function MapLocater() {
     }
 
     const handleOnClick = (event) => {
-        console.log("Hello");
+        // console.log("Hello");
         console.log(event.target.value);
     }
 
     const handleHeatMapClick = () => {
+        setPlot("heatmap");
         renderHeatMap(dataInsideCircle);
     }
 
     const handlePieChartClick = () => {
+        setPlot("pie");
         renderPieChart(dataInsideCircle, "Meal(P1)", "#pie1")
+    }
+
+    const handleReviewsWordCloudClick = () => {
+        setPlot("wordCloud");
+        renderWordCloud(dataInsideCircle);
     }
 
 
@@ -32,7 +42,7 @@ export default function MapLocater() {
     const [lng, setLng] = useState(0);
 
     const [dataInsideCircle, setDataInsideCircle] = useState([]);
-
+    const [array_word, set_array_word] = useState([]);
 
     function MyComponent() {
         const map = useMapEvents({
@@ -58,14 +68,18 @@ export default function MapLocater() {
                     if (dist <= radius) {
                         dataTemp.push(d);
                     }
+
                 })
 
                 setDataInsideCircle(dataTemp);
-                console.log(dataInsideCircle);
+
+                // console.log(dataInsideCircle);
 
             }
         });
     }
+
+
 
     function AllCircles() {
         deliveryData.map((data) => {
@@ -90,6 +104,7 @@ export default function MapLocater() {
 
         d3.selectAll("g.heatmap").remove();
         d3.selectAll("g.pieChart").remove();
+        d3.selectAll('.wc').remove();
 
 
         // append the svg object to the body of the page
@@ -226,9 +241,6 @@ export default function MapLocater() {
 
     const renderPieChart = (dataPie, preference, pie_id) => {
 
-        console.log(dataPie);
-
-        // d3.selectAll('.heatmap').remove()
 
         var width = 500;
         var height = 500;
@@ -278,6 +290,8 @@ export default function MapLocater() {
 
         d3.selectAll("g.heatmap").remove();
         d3.selectAll("g.pieChart").remove();
+        d3.selectAll('.wc').remove();
+
 
         // Append the SVG canvas to the page
         var svg = d3.select(svgRef.current)
@@ -288,6 +302,12 @@ export default function MapLocater() {
             .attr("class", "pieChart")
             .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
+        // svg.append('text')
+        //     .classed('h4', true)
+        //     .attr("x", 0)
+        //     .attr("y", -100)
+        //     .text("Hello")
+        //     .attr("text-anchor", "middle");
 
         // Add the arcs
         var g = svg
@@ -305,6 +325,8 @@ export default function MapLocater() {
                 return color(d.data.label);
             });
 
+
+
         // Add the text labels
         g.append("text")
             .attr("class", "pieChart")
@@ -316,6 +338,99 @@ export default function MapLocater() {
             .text(function (d) {
                 return d.data.label;
             });
+    }
+
+    function printFrequency(str) {
+        let arr = [];
+
+        let M = new Map();
+        let word = "";
+        const stopwords = ["nil", 'a', 'about', 'above', 'after', 'again', 'against', 'all', 'am', 'an', 'and', 'any', 'are', "aren't", 'as', 'at', 'be', 'because', 'been', 'before', 'being', 'below', 'between', 'both', 'but', 'by', 'can', "can't", 'cannot', 'com', 'could', "couldn't", 'did', "didn't", 'do', 'does', "doesn't", 'doing', "don't", 'down', 'during', 'each', 'else', 'ever', 'few', 'for', 'from', 'further', 'get', 'had', "hadn't", 'has', "hasn't", 'have', "haven't", 'having', 'he', "he'd", "he'll", "he's", 'her', 'here', "here's", 'hers', 'herself', 'him', 'himself', 'his', 'how', "how's", 'http', 'i', "i'd", "i'll", "i'm", "i've", 'if', 'in', 'into', 'is', "isn't", 'it', "it's", 'its', 'itself', 'just', 'k', "let's", 'like', 'me', 'more', 'most', "mustn't", 'my', 'myself', 'no', 'nor', 'not', 'of', 'off', 'on', 'once', 'only', 'or', 'other', 'ought', 'our', 'ours', 'ourselves', 'out', 'over', 'own', 'r', 'same', 'shall', "shan't", 'she', "she'd", "she'll", "she's", 'should', "shouldn't", 'so', 'some', 'such', 'than', 'that', "that's", 'the', 'their', 'theirs', 'them', 'themselves', 'then', 'there', "there's", 'these', 'they', "they'd", "they'll", "they're", "they've", 'this', 'those', 'through', 'to', 'too', 'under', 'until', 'up', 'very', 'was', "wasn't", 'we', "we'd", "we'll", "we're", "we've", 'were', "weren't", 'what', "what's", 'when', "when's", 'where', "where's", 'which', 'while', 'who', "who's", 'whom', 'why', "why's", 'with', "won't", 'would', "wouldn't", 'www', 'you', "you'd", "you'll", "you're", "you've", 'your', 'yours', 'yourself', 'yourselves', '?', '(', ')']
+
+        for (let i = 0; i < str.length; i++) {
+            if (str[i] === " ") {
+                if (word && !stopwords.includes(word.toLowerCase())) {
+                    const lowerWord = word.toLowerCase();
+                    if (!M.has(lowerWord)) {
+                        M.set(lowerWord, 1);
+                    } else {
+                        M.set(lowerWord, M.get(lowerWord) + 1);
+                    }
+                }
+                word = "";
+            } else {
+                word += str[i];
+            }
+        }
+
+        if (word && !stopwords.includes(word.toLowerCase())) {
+            const lowerWord = word.toLowerCase();
+            if (!M.has(lowerWord)) {
+                M.set(lowerWord, 1);
+            } else {
+                M.set(lowerWord, M.get(lowerWord) + 1);
+            }
+        }
+
+
+        // sorting map key in increasing order
+        M = new Map([...M.entries()].sort());
+        for (let [key, value] of M) {
+            // arr.push(`${key} :${value}`);
+            arr.push({ word: key, size: value });
+        }
+
+        set_array_word(arr);
+
+    }
+
+    const renderWordCloud = (data) => {
+
+        d3.selectAll("g.heatmap").remove();
+        d3.selectAll("g.pieChart").remove();
+        d3.selectAll('.wc').remove();
+
+        data.forEach((d) => {
+            const Rev = d.Reviews;
+            printFrequency(Rev, array_word);
+            console.log(array_word);
+
+
+            const sortedWords = array_word.sort((a, b) => b.size - a.size);
+            const top10Words = sortedWords.slice(0, 60);
+            // console.log("top10", top10Words)
+
+            var layout = cloud()
+                .size([500, 500])
+                .words(top10Words.map(function (di) { return { text: di.word, size: di.size }; }))
+                .padding(5)        //space between words
+                .rotate(function () { return ~~(Math.random() * 2) * 90; })
+                .fontSize(function (d) { return d.size * 20; })      // font size of words
+                .on("end", draw);
+
+            function draw(words) {
+                d3.select(svgRef.current)
+                    .append("g")
+                    .attr("class", "wc")
+                    .attr("transform", "translate(" + layout.size()[0] / 2 + "," + layout.size()[1] / 2 + ")")
+                    .selectAll("text")
+                    .data(words)
+                    .enter().append("text")
+                    .style("font-size", function (d) { return d.size; })
+                    .style("fill", "#69b3a2")
+                    .attr("text-anchor", "middle")
+                    .style("font-family", "Impact")
+                    .attr("transform", function (d) {
+                        return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+                    })
+                    .text(function (d) { return d.text; });
+            }
+
+            d3.selectAll(".wc").remove()
+            layout.start();
+
+        })
+
     }
 
 
@@ -334,7 +449,7 @@ export default function MapLocater() {
                             <input type="range" className="form-range" id="customRange1" value={radius} onChange={handleOnRadiusChange} min="500" max="15000" />
                         </div>
 
-                        <div className='map-1'>
+                        <div className='map-2'>
                             <MapContainer
                                 className='shadow-5-strong'
                                 center={[12.9716, 77.5946]}
@@ -363,10 +478,6 @@ export default function MapLocater() {
                                 }
 
                                 {
-
-                                }
-
-                                {
                                     <Circle center={[lat, lng]} pathOptions={{ "color": "red", "opacity": "0.4", "name": "P-1", "interactive": "true" }} radius={radius} />
 
                                 }
@@ -380,11 +491,26 @@ export default function MapLocater() {
 
                         <button className='btn btn-primary btn-sm' onClick={handleHeatMapClick}>Heatmap</button>
                         <button className='btn btn-primary btn-sm ms-5' onClick={handlePieChartClick}>Pie chart</button>
-                        <button className='btn btn-primary btn-sm ms-5'>Bubble Plot</button>
+                        <button className='btn btn-primary btn-sm ms-5' onClick={handleReviewsWordCloudClick}>Reviews Word Cloud</button>
 
 
-                        <div className='svg-container-1'>
-                            <svg ref={svgRef} id='svg1'></svg>
+                        <div className='my-5'>
+                            {plot == "pie" &&
+                                <h3 className='my-3 fw-bold' style={{ "marginLeft": "150px" }}>Meal Preferences</h3>
+                            }
+
+                            {plot == "heatmap" &&
+                                <h3 className='my-3 fw-bold ' style={{ "marginLeft": "150px" }}>Factors influencing online ordering</h3>
+                            }
+
+                            { plot == "wordCloud" && 
+                                <h3 className='my-3 fw-bold' style={{ "marginLeft": "150px" }}>User Reviews</h3>
+                            }
+                            
+
+                            <div className='svg-container-1'>
+                                <svg ref={svgRef} id='svg1'></svg>
+                            </div>
                         </div>
 
                     </div>
