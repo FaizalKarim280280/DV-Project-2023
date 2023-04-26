@@ -1,5 +1,5 @@
 import React from 'react'
-import Age_meal_barplot from './AgeMealBarplot'
+import AgeMealBarplot from './AgeMealBarplot'
 import Sankey from './Sankey'
 import Footer from './Footer'
 import MapMeal from './MapMeal'
@@ -67,13 +67,13 @@ export default function Home() {
             </div>
 
 
-            <Age_meal_barplot />
+            <AgeMealBarplot />
+            <OrderingSupport/>
 
             {/* <Sankey/> */}
 
             <MapMeal/>
 
-            <OrderingSupport/>
 
             <Footer />
 

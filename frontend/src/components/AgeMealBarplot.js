@@ -6,11 +6,13 @@ const incomeMealData = require('../data/income-meal.json');
 
 export default function Age_meal_barplot() {
 
+    const [plot, setPlot] = useState("age");
+
     const svgRef = useRef();
     const svgRef2 = useRef();
 
-    const width = 900;
-    const height = 600;
+    const width = 700;
+    const height = 550;
 
     const margin = {
         top: 70,
@@ -40,7 +42,7 @@ export default function Age_meal_barplot() {
     }
 
     const renderPlot2 = () => {
-        const svg = d3.select(svgRef2.current)
+        const svg = d3.select(svgRef.current)
             .attr('width', width)
             .attr('height', height);
 
@@ -57,19 +59,11 @@ export default function Age_meal_barplot() {
             "Meal Consumption by Income level: A Grouped Bar Char", "Income level", "Count");
     }
 
-    useEffect(() => {
-
-        renderPlot1();
-        renderPlot2();
-
-        // console.log(d3.scaleOrdinal(d3.schemeTableau10)[0]);
-
-
-    }, [])
-
 
 
     const renderGroupedBarPlot = (data, subgroups, groups, svg, max, colors, title, xlabel, ylabel) => {
+
+        svg.selectAll('g').remove();
 
         const g = svg.append('g')
             .attr('transform', `translate(${margin.left}, ${margin.top})`);
@@ -78,13 +72,16 @@ export default function Age_meal_barplot() {
         var x = d3.scaleBand()
             .domain(groups)
             .range([0, innerWidth])
-            .padding([0.2]);
+            .padding([0.15]);
 
         const xAxis = d3.axisBottom(x).tickSize(10);
 
         const xAxisG = g.append('g')
             .call(xAxis)
             .attr('transform', `translate(0, ${innerHeight})`)
+            // .selectAll('text')
+            // .attr('transform', 'rotate(-25)')
+            // .attr("text-anchor", "end")
             .append('text')
             .attr('y', 50)
             .attr('x', innerWidth / 2)
@@ -97,6 +94,7 @@ export default function Age_meal_barplot() {
         var y = d3.scaleLinear()
             .domain([0, max])
             .range([innerHeight, 0])
+            .nice();
 
         const yAxis = d3.axisLeft(y);
 
@@ -197,6 +195,20 @@ export default function Age_meal_barplot() {
 
     }
 
+    const handleRadioOnChange = (event) => {
+        setPlot(event.target.value);
+
+
+    }
+
+    useEffect(() => {
+
+        plot === "age" ? renderPlot1() : renderPlot2();
+
+
+
+
+    }, [plot])
 
 
 
@@ -205,40 +217,43 @@ export default function Age_meal_barplot() {
 
 
 
-            <div>
+            <div className='my-5 p-5'>
 
-                <div className="row" style={{ "padding": "5% 5% 6% 5%" }}>
+                <div className='ms-5'>
+
+                    <div className="form-check form-check-inline">
+                        <input className="form-check-input" type="radio" name="inlineRadioOptions1" defaultChecked value="age" onChange={handleRadioOnChange} />
+                        <label className="form-check-label">Age Group</label>
+                    </div>
+
+                    <div className="form-check form-check-inline">
+                        <input className="form-check-input" type="radio" name="inlineRadioOptions2" value="income" onChange={handleRadioOnChange} />
+                        <label className="form-check-label" >Income Level</label>
+                    </div>
+                </div>
+
+                <div className="row" style={{ "paddingTop": "2%" }}>
+
                     <div className="col-6">
                         <div className='svg-container-1'>
                             <svg ref={svgRef} id='svg1'></svg>
                         </div>
                     </div>
 
-                    <div className="col-6">
-                        {/* <p>Hello world</p> */}
+                    <div className="col-4">
+                        <h3 className='display-4 my-4 fw-bold'>Snacks Take the Lead</h3>
+                        
+                        <p className='fs-5 mt-4' style={{ "textAlign": "justify", "textJustify": "inter-word" }}> When it comes to online food delivery, snacks are the clear winner across all age groups and income levels. </p>
+
+                        <p className='fs-5 mt-4' style={{ "textAlign": "justify", "textJustify": "inter-word" }}>While breakfast, lunch, and dinner orders are a part of the mix, it's the snacks that have emerged as the preferred choice for many. Regardless of whether you're a student with no income or a high-earning professional, the data indicates that snacks are the go-to option when ordering food online. </p>
+
+                        <hr className='hr hr-blurry mt-5'/>
+
                     </div>
 
                 </div>
 
-            </div>
-
-            <div className='gray-bg'>
-
-                <div className="row" style={{ "padding": "5% 5% 6% 5%" }}>
-                    <div className="col-6">
-
-                    </div>
-
-                    <div className="col-6">
-                        <div className='svg-container-1'>
-                            <svg ref={svgRef2} id='svg2'></svg>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-
+            </div >
 
         </>
     )

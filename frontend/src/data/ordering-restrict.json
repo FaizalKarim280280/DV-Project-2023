@@ -1,0 +1,177 @@
+[
+    {
+        "group": "Self Cooking",
+        "variable": "Strongly disagree",
+        "value": "3.866"
+    },
+    {
+        "group": "Self Cooking",
+        "variable": "Disagree",
+        "value": "36.082"
+    },
+    {
+        "group": "Self Cooking",
+        "variable": "Neutral",
+        "value": "12.371"
+    },
+    {
+        "group": "Self Cooking",
+        "variable": "Agree",
+        "value": "42.784"
+    },
+    {
+        "group": "Self Cooking",
+        "variable": "Strongly agree",
+        "value": "4.897"
+    },
+    {
+        "group": "Health Concern",
+        "variable": "Strongly disagree",
+        "value": "3.351"
+    },
+    {
+        "group": "Health Concern",
+        "variable": "Disagree",
+        "value": "30.67"
+    },
+    {
+        "group": "Health Concern",
+        "variable": "Neutral",
+        "value": "17.526"
+    },
+    {
+        "group": "Health Concern",
+        "variable": "Agree",
+        "value": "31.186"
+    },
+    {
+        "group": "Health Concern",
+        "variable": "Strongly agree",
+        "value": "17.268"
+    },
+    {
+        "group": "Late Delivery",
+        "variable": "Strongly disagree",
+        "value": "8.505"
+    },
+    {
+        "group": "Late Delivery",
+        "variable": "Disagree",
+        "value": "19.072"
+    },
+    {
+        "group": "Late Delivery",
+        "variable": "Neutral",
+        "value": "22.423"
+    },
+    {
+        "group": "Late Delivery",
+        "variable": "Agree",
+        "value": "42.01"
+    },
+    {
+        "group": "Late Delivery",
+        "variable": "Strongly agree",
+        "value": "7.99"
+    },
+    {
+        "group": "Poor Hygiene",
+        "variable": "Strongly disagree",
+        "value": "6.701"
+    },
+    {
+        "group": "Poor Hygiene",
+        "variable": "Disagree",
+        "value": "28.866"
+    },
+    {
+        "group": "Poor Hygiene",
+        "variable": "Neutral",
+        "value": "22.68"
+    },
+    {
+        "group": "Poor Hygiene",
+        "variable": "Agree",
+        "value": "28.351"
+    },
+    {
+        "group": "Poor Hygiene",
+        "variable": "Strongly agree",
+        "value": "13.402"
+    },
+    {
+        "group": "Bad past experience",
+        "variable": "Strongly disagree",
+        "value": "7.732"
+    },
+    {
+        "group": "Bad past experience",
+        "variable": "Disagree",
+        "value": "36.856"
+    },
+    {
+        "group": "Bad past experience",
+        "variable": "Neutral",
+        "value": "21.907"
+    },
+    {
+        "group": "Bad past experience",
+        "variable": "Agree",
+        "value": "25.515"
+    },
+    {
+        "group": "Bad past experience",
+        "variable": "Strongly agree",
+        "value": "7.99"
+    },
+    {
+        "group": "Unavailability",
+        "variable": "Strongly disagree",
+        "value": "16.237"
+    },
+    {
+        "group": "Unavailability",
+        "variable": "Disagree",
+        "value": "32.474"
+    },
+    {
+        "group": "Unavailability",
+        "variable": "Neutral",
+        "value": "18.814"
+    },
+    {
+        "group": "Unavailability",
+        "variable": "Agree",
+        "value": "24.485"
+    },
+    {
+        "group": "Unavailability",
+        "variable": "Strongly agree",
+        "value": "7.99"
+    },
+    {
+        "group": "Unaffordable",
+        "variable": "Strongly disagree",
+        "value": "21.134"
+    },
+    {
+        "group": "Unaffordable",
+        "variable": "Disagree",
+        "value": "39.433"
+    },
+    {
+        "group": "Unaffordable",
+        "variable": "Neutral",
+        "value": "15.979"
+    },
+    {
+        "group": "Unaffordable",
+        "variable": "Agree",
+        "value": "7.216"
+    },
+    {
+        "group": "Unaffordable",
+        "variable": "Strongly agree",
+        "value": "21.134"
+    }
+]

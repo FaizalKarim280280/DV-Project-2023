@@ -1,50 +1,59 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRef } from 'react';
 import * as d3 from 'd3';
 
 
-const orderingSupportData = require('../data/ordering-support.json')
+const orderingSupportData = require('../data/ordering-support.json');
+const orderingRestrictData = require('../data/ordering-restrict.json');
 
 export default function OrderingSupport() {
 
-    const svgRef = useRef();
+    const [plot, setPlot] = useState("support");
 
-    const width = 800;
+    const svgRef3 = useRef();
+
+    const width = 700;
     const height = 600;
 
     const margin = {
         top: 60,
         right: 30,
         bottom: 150,
-        left: 90
+        left: 200
     };
 
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
+    
+    const renderHeatmap = (data) => {
 
-    const renderStackedBarPlot = (data) => {
-        const svg = d3.select(svgRef.current)
+        let groups = d3.map(data, d => d['group']);
+        groups = Array.from(new Set(groups));
+
+        // console.log(groups);
+
+        const svg = d3.select(svgRef3.current)
             .attr('width', width)
             .attr('height', height);
 
+        svg.selectAll('g').remove();
 
-        const groups = ["Ease and convenient", "Time saving", "More restaurant choices", "Good Food quality", "Easy Payment option",
-            "More Offers and Discount", "Good Tracking system"];
+        const subgroups = ['Strongly disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly agree'];
 
-        const subgroups = ['Strongly disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly agree']
 
-        const yScale = d3.scaleLinear()
-            .domain([0, 100])
-            .range([innerHeight, 0]);
-            
-        const xScale = d3.scaleBand()
-            .domain(groups)
+        var xScale = d3.scaleBand()
             .range([0, innerWidth])
-            .padding(0.2);
+            .domain(subgroups)
+            .padding(0.01);
+
+        var yScale = d3.scaleBand()
+            .range([innerHeight, 0])
+            .domain(groups)
+            .padding(0.05);
 
         const xAxis = d3.axisBottom(xScale)
-            .tickSize(-10);
+        // .tickSize(-10);
 
         const yAxis = d3.axisLeft(yScale);
 
@@ -53,107 +62,98 @@ export default function OrderingSupport() {
 
         const xAxisG = g.append('g')
             .call(xAxis)
-            .attr('transform', `translate(0, ${innerHeight + 50})`)
-            .selectAll('text')
-            .attr('transform', 'rotate(-25)')
-            .attr("text-anchor", "end")
-            .append('text')
-            .attr('y', 50)
-            .attr('x', innerWidth / 2)
-            .text('Race')
-            .attr('fill', 'black');
+            .attr('transform', `translate(0, ${innerHeight})`)
+        // .append('text')
+        // .attr('y', 50)
+        // .attr('x', innerWidth / 2)
+        // .text('Race')
+        // .attr('fill', 'black');
 
         const yAxisG = g.append('g')
             .call(yAxis)
-            .attr('transform', `translate(0, ${50})`)
-            .append('text')
-            .attr('transform', 'rotate(-90)')
-            .attr('x', -innerHeight / 2)
-            .attr('y', -50)
-            .text('Percentage')
-            .attr('fill', 'black');
+        // .attr('transform', `translate(0, ${50})`)
+        // .append('text')
+        // .attr('transform', 'rotate(-90)')
+        // .attr('x', -innerHeight / 2)
+        // .attr('y', -50)
+        // .text('Percentage')
+        // .attr('fill', 'black');
 
-        var color = d3.scaleOrdinal()
-            .domain(subgroups)
-            .range(["#fee391", "#fec44f", "#fe9929", "#d95f0e", "#993404"]);
-
-        g.append('text')
-            .classed('h4', true)
-            .attr("x", innerWidth / 2)
-            .attr("y", -40)
-            .text(`Factors supporting online ordering`)
-            .attr('text-anchor', 'middle')
+        var myColor = d3.scaleLinear()
+            .range(["#E0F2F1", "#00695C"])
+            .domain([1, 40])
 
 
-        var stackedData = d3.stack()
-            .keys(subgroups)
-            (data);
-
-        g.append('g')
-            .attr('transform', `translate(0, 50)`)
-            .selectAll('g')
-            .data(stackedData)
+        g.selectAll()
+            .data(data)
             .enter()
-            .append('g')
-            .attr('fill', function (d) { return color(d.key) })
-            .selectAll('rect')
-            .data(function (d) { return d; })
-            .enter()
-            .append('rect')
-            .attr('y', yScale(1))
-            .attr('x', function (d) { return xScale(d.data.group); })
-            .attr('width', xScale.bandwidth())
-            .attr('opacity', 0)
+            .append("rect")
+            .attr("x", function (d) { return xScale(d['variable']) })
+            .attr("y", function (d) { return yScale(d['group']) })
             .transition()
-            .duration(800)
-            .attr('x', function (d) { return xScale(d.data.group); })
-            .attr('y', function (d) { return yScale(d[1]) - 10; })
-            .attr('height', function (d) { return yScale(d[0]) - yScale(d[1]); })
-            .attr('width', xScale.bandwidth())
-            .attr('opacity', 1)
-            .delay(function (d, i) {
-                return i * 200;
-            })
-
-        g.selectAll('my-dots')
-            .data(subgroups)
-            .enter()
-            .append('circle')
-            .attr('cx', innerWidth + 20)
-            .attr('cy', function (d, i) { return  i * 30 })
-            .transition()
-            .duration(400)
-            .attr('r', 7)
-            .style('fill', function (d, i) { return color(d) })
-            .delay(function (d, i) { return (i * 300) });
-
-        g.selectAll('my-labels')
-            .data(subgroups)
-            .enter()
-            .append('text')
-            .attr('x', innerWidth + 40)
-            .attr('y', function (d, i) { return 7 + i * 30 })
-            .attr('opacity', 0.3)
-            .transition()
-            .duration(400)
-            .text(function (d) { return d })
-            .delay(function (d, i) { return i * 300 })
-            .attr('opacity', 1);    
-
+            .duration(500)
+            .attr("width", xScale.bandwidth())
+            .attr("height", yScale.bandwidth())
+            .style("fill", function (d) { return myColor(+d['value']) })
+            .delay(function (d, i) { return 20 * i });
 
     }
 
+    const handleRadioOnChange = (event) => {
+        setPlot(event.target.value);
+    }
+
+
     useEffect(() => {
-        renderStackedBarPlot(orderingSupportData)
+
+        plot === "support" ? renderHeatmap(orderingSupportData) :
+            renderHeatmap(orderingRestrictData)
+
     })
 
     return (
         <>
 
-            <div className='gray-bg'>
+            <div className='gray-bg my-5 p-5'>
 
-                <div className='row' style={{ "padding": "5% 5% 6% 5%" }}>
-                    <svg ref={svgRef}></svg>
+                <div className='row'>
+                    <div className="col-md-6" style={{ "padding": "4% 0 0 5%" }}>
+                        {plot == "support" ?
+                            <div>
+                                <h3 className='display-5 my-4 fw-bold'>Ease, Quality, and Choice Reign Supreme in Online Food Delivery Preferences</h3>
+
+                                <p className='fs-5 mt-4' style={{ "textAlign": "justify", "textJustify": "inter-word" }}> The data shows that consumers are most influenced by factors related to the actual experience of ordering and receiving food, such as convenience, food quality, and restaurant variety. Meanwhile, factors that might seem important to companies, such as discounts and tracking systems, don't appear to make much of a difference to consumers.</p>
+                            </div> :
+
+                            <div>
+                                <h3 className='display-5 my-4 fw-bold'>Health Matters: Late Deliveries Aren't the Only Reason People Avoid Ordering Food Online</h3>
+
+                                <p className='fs-5 mt-4' style={{ "textAlign": "justify", "textJustify": "inter-word" }}> It has been found that people's health concerns are a significant factor in their decision-making process for ordering food online. Additionally, the report highlights that late deliveries also deter customers from ordering food online.</p>
+
+                                <p className='fs-5 mt-4' style={{ "textAlign": "justify", "textJustify": "inter-word" }}> Surprisingly, the affordability of food and past bad experiences with online food delivery services are not as significant in people's decision-making process. </p>
+                            </div>}
+                        <hr className='hr hr-blurry mt-5' />
+                    </div>
+
+                    <div className="col-md-6" style={{ "paddingLeft": "5%" }}>
+                        <div className='ms-5'>
+
+                            <div className="form-check form-check-inline">
+                                <input className="form-check-input" type="radio" name="inlineRadioOptions" defaultChecked value="support" onChange={handleRadioOnChange} />
+                                <label className="form-check-label" htmlFor="inlineRadio1">Order Support</label>
+                            </div>
+
+                            <div className="form-check form-check-inline">
+                                <input className="form-check-input" type="radio" name="inlineRadioOptions" value="restrict" onChange={handleRadioOnChange} />
+                                <label className="form-check-label" htmlFor="inlineRadio2">Order Restrict</label>
+                            </div>
+                        </div>
+
+                        <div className='svg-container-1'>
+                            <svg ref={svgRef3}></svg>
+                        </div>
+
+                    </div>
                 </div>
 
             </div>

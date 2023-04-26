@@ -1,58 +1,177 @@
 [
     {
         "group": "Ease and convenient",
-        "Strongly disagree": "2.062",
-        "Disagree": "14.948",
-        "Neutral": "5.155",
-        "Agree": "60.567",
-        "Strongly agree": "17.268"
+        "variable": "Strongly disagree",
+        "value": "2.062"
+    },
+    {
+        "group": "Ease and convenient",
+        "variable": "Disagree",
+        "value": "14.948"
+    },
+    {
+        "group": "Ease and convenient",
+        "variable": "Neutral",
+        "value": "5.155"
+    },
+    {
+        "group": "Ease and convenient",
+        "variable": "Agree",
+        "value": "60.567"
+    },
+    {
+        "group": "Ease and convenient",
+        "variable": "Strongly agree",
+        "value": "17.268"
     },
     {
         "group": "Time saving",
-        "Strongly disagree": "2.320",
-        "Disagree": "17.010",
-        "Neutral": "14.175",
-        "Agree": "36.856",
-        "Strongly agree": "29.639"
+        "variable": "Strongly disagree",
+        "value": "2.320"
+    },
+    {
+        "group": "Time saving",
+        "variable": "Disagree",
+        "value": "17.010"
+    },
+    {
+        "group": "Time saving",
+        "variable": "Neutral",
+        "value": "14.175"
+    },
+    {
+        "group": "Time saving",
+        "variable": "Agree",
+        "value": "36.856"
+    },
+    {
+        "group": "Time saving",
+        "variable": "Strongly agree",
+        "value": "29.639"
     },
     {
         "group": "More restaurant choices",
-        "Strongly disagree": "3.866",
-        "Disagree": "11.598",
-        "Neutral": "14.175",
-        "Agree": "43.557",
-        "Strongly agree": "26.804"
+        "variable": "Strongly disagree",
+        "value": "3.866"
+    },
+    {
+        "group": "More restaurant choices",
+        "variable": "Disagree",
+        "value": "11.598"
+    },
+    {
+        "group": "More restaurant choices",
+        "variable": "Neutral",
+        "value": "14.175"
+    },
+    {
+        "group": "More restaurant choices",
+        "variable": "Agree",
+        "value": "43.557"
+    },
+    {
+        "group": "More restaurant choices",
+        "variable": "Strongly agree",
+        "value": "26.804"
     },
     {
         "group": "Good Food quality",
-        "Strongly disagree": "4.639",
-        "Disagree": "12.629",
-        "Neutral": "28.866",
-        "Agree": "36.340",
-        "Strongly agree": "17.526"
+        "variable": "Strongly disagree",
+        "value": "4.639"
+    },
+    {
+        "group": "Good Food quality",
+        "variable": "Disagree",
+        "value": "12.629"
+    },
+    {
+        "group": "Good Food quality",
+        "variable": "Neutral",
+        "value": "28.866"
+    },
+    {
+        "group": "Good Food quality",
+        "variable": "Agree",
+        "value": "36.340"
+    },
+    {
+        "group": "Good Food quality",
+        "variable": "Strongly agree",
+        "value": "17.526"
     },
     {
         "group": "Easy Payment option",
-        "Strongly disagree": "6.186",
-        "Disagree": "13.402",
-        "Neutral": "19.588",
-        "Agree": "36.856",
-        "Strongly agree": "23.969"
+        "variable": "Strongly disagree",
+        "value": "6.186"
+    },
+    {
+        "group": "Easy Payment option",
+        "variable": "Disagree",
+        "value": "13.402"
+    },
+    {
+        "group": "Easy Payment option",
+        "variable": "Neutral",
+        "value": "19.588"
+    },
+    {
+        "group": "Easy Payment option",
+        "variable": "Agree",
+        "value": "36.856"
+    },
+    {
+        "group": "Easy Payment option",
+        "variable": "Strongly agree",
+        "value": "23.969"
     },
     {
         "group": "More Offers and Discount",
-        "Strongly disagree": "5.928",
-        "Disagree": "16.237",
-        "Neutral": "19.588",
-        "Agree": "34.021",
-        "Strongly agree": "24.227"
+        "variable": "Strongly disagree",
+        "value": "5.928"
+    },
+    {
+        "group": "More Offers and Discount",
+        "variable": "Disagree",
+        "value": "16.237"
+    },
+    {
+        "group": "More Offers and Discount",
+        "variable": "Neutral",
+        "value": "19.588"
+    },
+    {
+        "group": "More Offers and Discount",
+        "variable": "agree",
+        "value": "34.021"
+    },
+    {
+        "group": "More Offers and Discount",
+        "variable": "Strongly agree",
+        "value": "24.227"
     },
     {
         "group": "Good Tracking system",
-        "Strongly disagree": "5.412",
-        "Disagree": "6.959",
-        "Neutral": "17.526",
-        "Agree": "41.495",
-        "Strongly agree": "28.608"
+        "variable": "Strongly disagree",
+        "value": "5.412"
+    },
+    {
+        "group": "Good Tracking system",
+        "variable": "Disagree",
+        "value": "6.959"
+    },
+    {
+        "group": "Good Tracking system",
+        "variable": "Neutral",
+        "value": "17.526"
+    },
+    {
+        "group": "Good Tracking system",
+        "variable": "agree",
+        "value": "41.495"
+    },
+    {
+        "group": "Good Tracking system",
+        "variable": "Strongly agree",
+        "value": "28.608"
     }
 ]

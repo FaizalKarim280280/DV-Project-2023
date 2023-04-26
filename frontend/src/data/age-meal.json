@@ -1,37 +1,37 @@
 [
     {
         "group": "18-20",
-        "Breakfast": "2",
-        "Lunch": "3",
-        "Dinner": "2",
-        "Snacks": "7"
+        "Breakfast": 14.285714,
+        "Lunch": 21.428571,
+        "Dinner": 14.285714,
+        "Snacks": 50.000000
     },
     {
         "group": "21-23",
-        "Breakfast": "23",
-        "Lunch": "58",
-        "Dinner": "35",
-        "Snacks": "37"
+        "Breakfast": 15.032680,
+        "Lunch": 37.908497,
+        "Dinner": 22.875817,
+        "Snacks": 24.183007
     },
     {
         "group": "24-26",
-        "Breakfast": "11",
-        "Lunch": "25",
-        "Dinner": "28",
-        "Snacks": "38"
+        "Breakfast": 11.666667,
+        "Lunch": 26.666667,
+        "Dinner": 29.722222,
+        "Snacks": 31.944444
     },
     {
         "group": "27-29",
-        "Breakfast": "7",
-        "Lunch": "11",
-        "Dinner": "5",
-        "Snacks": "13"
+        "Breakfast": 17.391304,
+        "Lunch": 27.536232,
+        "Dinner": 12.318841,
+        "Snacks": 31.753425
     },
     {
         "group": "30-32",
-        "Breakfast": "10",
-        "Lunch": "23",
-        "Dinner": "21",
-        "Snacks": "29"
+        "Breakfast": 12.820513,
+        "Lunch": 29.487179,
+        "Dinner": 27.564103,
+        "Snacks": 30.128205
     }
 ]
