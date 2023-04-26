@@ -25,7 +25,7 @@ export default function OrderingSupport() {
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
-    
+
     const renderHeatmap = (data) => {
 
         let groups = d3.map(data, d => d['group']);
@@ -117,12 +117,14 @@ export default function OrderingSupport() {
             <div className='gray-bg my-5 p-5'>
 
                 <div className='row'>
-                    <div className="col-md-6" style={{ "padding": "4% 0 0 5%" }}>
+                    <div className="col-md-5" style={{ "padding": "4% 0 0 5%" }}>
                         {plot == "support" ?
                             <div>
                                 <h3 className='display-5 my-4 fw-bold'>Ease, Quality, and Choice Reign Supreme in Online Food Delivery Preferences</h3>
 
-                                <p className='fs-5 mt-4' style={{ "textAlign": "justify", "textJustify": "inter-word" }}> The data shows that consumers are most influenced by factors related to the actual experience of ordering and receiving food, such as convenience, food quality, and restaurant variety. Meanwhile, factors that might seem important to companies, such as discounts and tracking systems, don't appear to make much of a difference to consumers.</p>
+                                <p className='fs-5 mt-4' style={{ "textAlign": "justify", "textJustify": "inter-word" }}> The data shows that consumers are most influenced by factors related to the actual experience of ordering and receiving food, such as convenience, food quality, and restaurant variety.</p>
+                                
+                                <p className='fs-5 mt-4' style={{ "textAlign": "justify", "textJustify": "inter-word" }}>Meanwhile, factors that might seem important to companies, such as discounts and tracking systems, don't appear to make much of a difference to consumers.</p>
                             </div> :
 
                             <div>
@@ -135,7 +137,7 @@ export default function OrderingSupport() {
                         <hr className='hr hr-blurry mt-5' />
                     </div>
 
-                    <div className="col-md-6" style={{ "paddingLeft": "5%" }}>
+                    <div className="col-md-6" style={{ "paddingLeft": "10%" }}>
                         <div className='ms-5'>
 
                             <div className="form-check form-check-inline">

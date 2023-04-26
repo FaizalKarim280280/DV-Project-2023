@@ -4,6 +4,8 @@ import Sankey from './Sankey'
 import Footer from './Footer'
 import MapMeal from './MapMeal'
 import OrderingSupport from './OrderingSupport'
+import MapLocater from './MapLocater'
+import MapDistribution from './MapDistribution'
 
 export default function Home() {
     return (
@@ -71,8 +73,9 @@ export default function Home() {
             <OrderingSupport/>
 
             {/* <Sankey/> */}
-
-            <MapMeal/>
+            <MapDistribution/>
+            
+            <MapLocater/>
 
 
             <Footer />

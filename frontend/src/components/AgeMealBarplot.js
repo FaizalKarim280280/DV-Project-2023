@@ -222,13 +222,13 @@ export default function Age_meal_barplot() {
                 <div className='ms-5'>
 
                     <div className="form-check form-check-inline">
-                        <input className="form-check-input" type="radio" name="inlineRadioOptions1" defaultChecked value="age" onChange={handleRadioOnChange} />
+                        <input className="form-check-input" type="radio" name="inlineRadioOptions" defaultChecked value="age" onChange={handleRadioOnChange} />
                         <label className="form-check-label">Age Group</label>
                     </div>
 
                     <div className="form-check form-check-inline">
-                        <input className="form-check-input" type="radio" name="inlineRadioOptions2" value="income" onChange={handleRadioOnChange} />
-                        <label className="form-check-label" >Income Level</label>
+                        <input className="form-check-input" type="radio" name="inlineRadioOptions" value="income" onChange={handleRadioOnChange} />
+                        <label className="form-check-label">Income Level</label>
                     </div>
                 </div>
 
